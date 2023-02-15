@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react";
-import { ScrollView, StyleSheet, Text } from "react-native";
+import { ScrollView, StyleSheet, Text, ImageBackground } from "react-native";
 import Posts from "./Posts";
 
 export default function Feed({navigation}){
@@ -14,19 +14,25 @@ export default function Feed({navigation}){
 
     return(
         <ScrollView style={styles.feed}>
+           <ImageBackground
+				source={require("../../assets/background-image.png")}
+				style={styles.backgroundImage}
+			>
          {!posts
          ? <Text> "Its loading..."</Text>
         : posts.map(post=>(
-            <Posts key={post.photoId} post ={post} navigation={navigation} />
+            <Posts key={post.photoId} post ={post} navigation={navigation}
+            clickable={true} />
 
         ))}
+        </ImageBackground>
         </ScrollView>
     )
 }
 
 const styles= StyleSheet.create({
     feed:{
-        backgroundColor: "pink",
+        backgroundColor: 'rgba(36,46,80,255)',
        // marginTop  : 40,
         width: '100%',
        

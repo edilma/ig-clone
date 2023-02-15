@@ -1,43 +1,60 @@
-import { Image,Text, View, StyleSheet , TouchableOpacity} from "react-native";
+import { Image, Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { useContext } from "react";
 import { PostContext } from "../../App";
 
-export default function Posts ({post, navigation}){
-    const {setCurrentPost} = useContext(PostContext);
-    const handleTouch = ()=>{
-        setCurrentPost(post)
-        navigation.navigate("Details")
-       
+export default function Posts({ post, navigation, clickable }) {
+    const { setCurrentPost } = useContext(PostContext);
+    //console.log("clickable",clickable)
+    const handleTouch = () => {
+
+        if (clickable) {
+            console.log(post)
+            setCurrentPost(post)
+            navigation.navigate("Details")
+        }
+
+
     }
 
-    return(
+    return (
         <TouchableOpacity onPress={handleTouch}>
-        <View style={styles.post}>
-            <Image style={styles.image} source={{uri: post.photo}}/>
-            <Text style={styles.title}>{post.description}</Text>
+            <View style={styles.post}>
+                <Image style={styles.image} source={{ uri: post.photo }} />
+                <Text style={styles.title}>{post.description}</Text>
 
-        </View>
+            </View>
         </TouchableOpacity>
     )
 
 }
 
-const styles= StyleSheet.create ({
-    post:{
+const styles = StyleSheet.create({
+    post: {
         margin: 10,
         padding: 10,
         borderRadius: 10,
-        backgroundColor: "white",
-        shadowColor: "black",
-        shadowOffset:{width: 1 , height: 2}
+        backgroundColor: "rgba(95,94,130,0,8)",
+        shadowColor: "#black",
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
+        shadowOpacity: 0.96,
+        shadowRadius: 10,
+        elevation: 11
     },
     image: {
         width: "100%",
         height: 300,
-        borderRadius:10,
-        marginBottom:10,
+        borderRadius: 10,
+        marginBottom: 10,
+        border: 300,
     },
     title: {
-        fontSize: 20
+        textAlign: "center",
+        marginTop: 13,
+        fontSize: 19,
+        color: "white"
+
     }
 })
